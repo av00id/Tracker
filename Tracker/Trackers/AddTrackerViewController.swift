@@ -34,7 +34,7 @@ final class AddTrackerViewController: UIViewController {
     
     weak var delegate: AddTrackerViewControllerDelegate?
     
-  /*  private var labelText = ""
+    private var labelText = ""
     private var category: String?
     private var schedule: [Weekday]?
     private var emoji: String?
@@ -51,7 +51,7 @@ final class AddTrackerViewController: UIViewController {
         "😇", "😡", "🥶", "🤔", "🙌", "🍔",
         "🥦", "🏓", "🥇", "🎸", "🏝", "😪",
     ]
-    private let colors = UIColor.selection */
+    private let colors = UIColor.selection 
     
     override func viewDidLoad() {
         super.viewDidLoad()
