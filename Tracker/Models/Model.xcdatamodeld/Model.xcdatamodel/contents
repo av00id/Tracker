@@ -4,7 +4,7 @@
         <attribute name="categoryId" attributeType="String"/>
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="label" attributeType="String"/>
-        <relationship name="trackers" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TrackerCoreData" inverseName="category" inverseEntity="TrackerCoreData"/>
+        <relationship name="trackers" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TrackerCoreData" inverseName="category" inverseEntity="TrackerCoreData"/>
     </entity>
     <entity name="TrackerCoreData" representedClassName="TrackerCoreData" syncable="YES" codeGenerationType="class">
         <attribute name="colorHEX" attributeType="String"/>

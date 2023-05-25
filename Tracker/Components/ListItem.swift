@@ -26,7 +26,7 @@ final class ListItem: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with position: Position = .middle) {
+    func configure(with position: Position) {
         layer.masksToBounds = true
         layer.cornerRadius = 10
         
@@ -40,7 +40,13 @@ final class ListItem: UIView {
         case .last:
             layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         case .alone:
-            break
+            border.isHidden = true
+            layer.maskedCorners = [
+                .layerMinXMaxYCorner,
+                .layerMaxXMaxYCorner,
+                .layerMinXMinYCorner,
+                .layerMaxXMinYCorner
+            ]
         }
     }
     

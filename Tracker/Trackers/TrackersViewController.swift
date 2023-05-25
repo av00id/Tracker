@@ -67,30 +67,7 @@ class TrackersViewController: UIViewController {
         return collectionView
     }()
     
-    private var placeholderView: UIImageView = {
-        let view = UIImageView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.image = UIImage(named: "tracker_placeholder")
-        return view
-    }()
-    
-    private var placeholderText: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
-        label.text = "Что будем отслеживать?"
-        label.textColor = .ypBlack
-        return label
-    }()
-    
-    private let placeholderStack: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.alignment = .center
-        stack.spacing = 8
-        return stack
-    }()
+   private let notFoundStack = NotFoundStack(label: "Что будем отслеживать?")
     
     private lazy var filterButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -125,6 +102,8 @@ class TrackersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideKeyboardWhenTappedAround()
+        
         addContent()
         addConstraints()
         
@@ -144,12 +123,9 @@ class TrackersViewController: UIViewController {
         view.addSubview(datePicker)
         view.addSubview(searchBar)
         view.addSubview(collectionView)
-        view.addSubview(placeholderStack)
+        view.addSubview(notFoundStack)
         view.addSubview(filterButton)
-        
-        placeholderStack.addArrangedSubview(placeholderView)
-        placeholderStack.addArrangedSubview(placeholderText)
-        
+    
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -175,8 +151,8 @@ class TrackersViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            placeholderStack.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
-            placeholderStack.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor),
+            notFoundStack.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
+            notFoundStack.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor),
             
             filterButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             filterButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
@@ -207,10 +183,10 @@ class TrackersViewController: UIViewController {
     
     private func checkNumberOfTrackers() {
         if trackerStore.numberOfTrackers == 0 {
-            placeholderStack.isHidden = false
+            notFoundStack.isHidden = false
             filterButton.isHidden = true
         } else {
-            placeholderStack.isHidden = true
+            notFoundStack.isHidden = true
             filterButton.isHidden = false
         }
     }
@@ -317,7 +293,6 @@ extension TrackersViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.setShowsCancelButton(true, animated: true)
-        
         return true
     }
     
@@ -357,6 +332,7 @@ extension TrackersViewController: AddTrackerViewControllerDelegate {
         let trackerFormViewController = TrackerFormViewController(type: type)
         trackerFormViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: trackerFormViewController)
+        navigationController.isModalInPresentation = true
         present(navigationController, animated: true)
     }
 }
@@ -368,6 +344,7 @@ extension TrackersViewController: TrackerFormViewControllerDelegate {
     }
     
     func didTapCancelButton() {
+        collectionView.reloadData()
         dismiss(animated: true)
     }
 }
