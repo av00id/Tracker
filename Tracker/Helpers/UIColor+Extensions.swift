@@ -12,8 +12,7 @@ extension UIColor {
     static var ypWhite: UIColor { UIColor(named: "YP White")!}
     static var ypGray: UIColor { UIColor(named: "YP Gray")!}
     static var ypLightGray: UIColor { UIColor(named: "YP Light Gray")!}
-    static var ypBackgroundDay: UIColor { UIColor(named: "YP Background Day")!}
-    static var ypBackgroundNight: UIColor { UIColor(named: "YP Background Night")!}
+    static var ypBackground: UIColor { UIColor(named: "YP Background")!}
     static var ypRed: UIColor { UIColor(named: "YP Red")!}
     static var ypBlue: UIColor { UIColor(named: "YP Blue")!}
     
@@ -37,4 +36,10 @@ extension UIColor {
         UIColor(named: "Color selection 17")!,
         UIColor(named: "Color selection 18")!
     ]
+    
+    static let gradient = [
+           UIColor(named: "gBlue")!,
+           UIColor(named: "gGreen")!,
+           UIColor(named: "gRed")!,
+       ]
 }

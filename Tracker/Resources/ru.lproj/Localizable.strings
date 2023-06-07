@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Tracker
+
+  Created by Сергей Андреев on 07.06.2023.
+  
+*/
+"main.title" = "Трекеры";
+"statistics.title" = "Статистика";
+"filters" = "Фильтры";
+"tabbar.trackers" = "Трекеры";
+"tabbar.statistics" = "Статистика";
+"day" = "день";
